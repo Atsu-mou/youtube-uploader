@@ -12,10 +12,10 @@ object AuthDecision {
     fun decide(
         snapshot: CredentialSnapshot?,
         nowMillis: Long,
-    ): AuthAction {
-        if (snapshot == null) return AuthAction.REAUTH
-        if (snapshot.refreshToken == null) return AuthAction.REAUTH
-        if (snapshot.accessToken == null) return AuthAction.REFRESH
-        return AuthAction.USE
-    }
+    ): AuthAction =
+        when {
+            snapshot?.refreshToken == null -> AuthAction.REAUTH
+            snapshot.accessToken == null -> AuthAction.REFRESH
+            else -> AuthAction.USE
+        }
 }

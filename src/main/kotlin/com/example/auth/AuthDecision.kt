@@ -13,6 +13,7 @@ object AuthDecision {
         snapshot: CredentialSnapshot?,
         nowMillis: Long,
     ): AuthAction {
-        return AuthAction.REAUTH
+        if (snapshot == null) return AuthAction.REAUTH
+        return AuthAction.USE
     }
 }

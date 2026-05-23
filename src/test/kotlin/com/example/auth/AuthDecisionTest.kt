@@ -55,4 +55,16 @@ class AuthDecisionTest {
             )
         assertEquals(AuthAction.REFRESH, AuthDecision.decide(snapshot, nowMillis = now))
     }
+
+    @Test
+    fun `returns REFRESH when expiry is within 60s skew`() {
+        val now = 1_000_000L
+        val snapshot =
+            CredentialSnapshot(
+                accessToken = "at",
+                refreshToken = "rt",
+                expiresAtMillis = now + 30_000L,
+            )
+        assertEquals(AuthAction.REFRESH, AuthDecision.decide(snapshot, nowMillis = now))
+    }
 }

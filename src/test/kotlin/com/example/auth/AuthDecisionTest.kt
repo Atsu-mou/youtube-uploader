@@ -21,4 +21,15 @@ class AuthDecisionTest {
             )
         assertEquals(AuthAction.USE, AuthDecision.decide(snapshot, now))
     }
+
+    @Test
+    fun `refreshToken が null なら REAUTH を返す`() {
+        val snapshot =
+            CredentialSnapshot(
+                accessToken = "at",
+                refreshToken = null,
+                expiresAtMillis = 9_999_999_999L,
+            )
+        assertEquals(AuthAction.REAUTH, AuthDecision.decide(snapshot, nowMillis = 0L))
+    }
 }

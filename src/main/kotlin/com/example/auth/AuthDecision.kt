@@ -14,6 +14,7 @@ object AuthDecision {
         nowMillis: Long,
     ): AuthAction {
         if (snapshot == null) return AuthAction.REAUTH
+        if (snapshot.refreshToken == null) return AuthAction.REAUTH
         return AuthAction.USE
     }
 }

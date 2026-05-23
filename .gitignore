@@ -1,0 +1,13 @@
+build/
+.gradle/
+.kotlin/
+.idea/
+*.iml
+.DS_Store
+local.properties
+
+# Secrets — never commit
+.env
+credentials/
+**/client_secret*.json
+**/client_secrets*.json

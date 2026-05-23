@@ -5,13 +5,13 @@ import kotlin.test.assertEquals
 
 class AuthDecisionTest {
     @Test
-    fun `snapshot が null なら REAUTH を返す`() {
+    fun `returns REAUTH when snapshot is null`() {
         val action = AuthDecision.decide(snapshot = null, nowMillis = 0L)
         assertEquals(AuthAction.REAUTH, action)
     }
 
     @Test
-    fun `5分後に切れるなら USE を返す`() {
+    fun `returns USE when credential expires in 5 minutes`() {
         val now = 1_000_000L
         val snapshot =
             CredentialSnapshot(
@@ -23,7 +23,7 @@ class AuthDecisionTest {
     }
 
     @Test
-    fun `refreshToken が null なら REAUTH を返す`() {
+    fun `returns REAUTH when refresh token is null`() {
         val snapshot =
             CredentialSnapshot(
                 accessToken = "at",

@@ -67,4 +67,15 @@ class AuthDecisionTest {
             )
         assertEquals(AuthAction.REFRESH, AuthDecision.decide(snapshot, nowMillis = now))
     }
+
+    @Test
+    fun `returns REFRESH when expiry is null`() {
+        val snapshot =
+            CredentialSnapshot(
+                accessToken = "at",
+                refreshToken = "rt",
+                expiresAtMillis = null,
+            )
+        assertEquals(AuthAction.REFRESH, AuthDecision.decide(snapshot, nowMillis = 0L))
+    }
 }

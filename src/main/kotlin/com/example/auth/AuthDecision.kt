@@ -18,7 +18,7 @@ object AuthDecision {
         when {
             snapshot?.refreshToken == null -> AuthAction.REAUTH
             snapshot.accessToken == null -> AuthAction.REFRESH
-            snapshot.expiresAtMillis != null && snapshot.expiresAtMillis <= nowMillis + EXPIRY_SKEW_MS -> AuthAction.REFRESH
+            snapshot.expiresAtMillis == null || snapshot.expiresAtMillis <= nowMillis + EXPIRY_SKEW_MS -> AuthAction.REFRESH
             else -> AuthAction.USE
         }
 }
